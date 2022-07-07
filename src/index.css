@@ -1,13 +1,158 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+header .nav-box {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 101px 0 101px;
+}
+
+header ul.nav {
+  height: 100%;
+  list-style-type: none;
+  display: block;
+  float: left;
+}
+
+header ul.nav li {
+  cursor: pointer;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  height: 100%;
+  padding: 0 16px 0 16px;
+}
+
+header ul.nav li.active {
+  color: #5ECE7B;
+  border-bottom: 2px solid #5ECE7B;
+}
+
+header .currency {
+  position: relative;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  display: flex;
+  width: 38px;
+  margin-right: 22px;
+}
+
+header .currency .arrow {
+  position: absolute;
+  left: 76.47%;
+  right: 20.59%;
+  top: 53.75%;
+  bottom: 38.75%;
+}
+
+header .nav-right-part {
+  display: flex;
+  align-items: center;
+}
+
+main.category {
+  margin-top: 80px;
+  padding: 0 101px 0 101px;
+}
+
+main .row {
+  display: flex;
+}
+
+main .heading {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 160%;
+}
+
+main.category .catalogue{
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  overflow: hidden;
+  justify-content: space-around;
+  margin-bottom: 191px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 386px;
+  height: 444px;
+  background: #FFFFFF;
+  margin-top: 103px;
+}
+
+.item:hover {
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.item .item-img {
+  width: 354px;
+  height: 330px;
+  position: relative;
+}
+
+.item .item-img .img-fluid{
+  max-width: 100%;
+  height: auto;
+}
+
+.item .item-content {
+  margin-top: 24px;
+  width: 354px;
+  padding: 0 16px 16px 16px;
+}
+
+.item .item-content h2 {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 160%;
+}
+
+.item .price {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+}
+
+.item .cart-button {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  right: 15px;
+  bottom: -26px;
+  background: #5ECE7B;
+  border-radius: 50%;
+  filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.1));
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.item:hover .cart-button{
+  display: flex;
 }
