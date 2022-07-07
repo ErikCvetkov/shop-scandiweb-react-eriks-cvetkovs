@@ -2,8 +2,7 @@ import React from "react";
 import './App.css';
 import Header from "./components/Header";
 import Items from "./components/Items";
-import { useQuery, gql } from '@apollo/client';
-import { Query } from '@apollo/client/react/components';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -13,21 +12,22 @@ class App extends React.Component {
       allItems: [],
       currentCategory: "all",
     }
-    this.state.currentCategory = this.chooseCategory.bind(this)
+    this.chooseCategory = this.chooseCategory.bind(this)
   }
+
   render() {
     return (
       <div>
-        <Header chooseCategory={this.chooseCategory}/>
-        <Items/>
+        <Header chooseCategory={this.chooseCategory} />
+        <Items category={this.state.currentCategory} />
       </div>
     )
   }
 
-
   chooseCategory(category) {
-    console.log(category)
-    return category;
+    this.setState({
+      currentCategory: category
+    })
   }
 
 }

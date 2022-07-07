@@ -3,9 +3,6 @@ import Categories from './Categories';
 import { useQuery, gql } from '@apollo/client';
 
 export class Header extends Component {
-    constructor(props){
-        super(props)
-    }
     render() {
         return (
             <header>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import GetAllItems from './GetAllItems';
 import { gql } from '@apollo/client';
 import { Query } from '@apollo/client/react/components';
 import Items from './Items';
+
 
 const POSTS_ITEMS = gql`
 query items {
@@ -11,6 +13,7 @@ query items {
         id
         name
         gallery
+        category
         prices{
           currency{
             symbol
@@ -23,6 +26,11 @@ query items {
   }
 `;
 
+
+const filter = (data,filter) => (filter === "all") ? (data.category.products) : (data.category.products.filter((item) => item.category === filter))
+
+
+
 export class Item extends Component {
     render() {
         return (
@@ -30,7 +38,8 @@ export class Item extends Component {
                 {({ loading, error, data }) => {
                     if (loading) return <p>Loading...</p>;
                     if (error) return <p>Error :(</p>;
-                    return data.category.products.map(({ id, name, prices, gallery }) => (
+                    const items = filter(data,this.props.category)
+                    return items.map(({ id, name, prices, gallery }) => (
                         <div className='item' key={id}>
                             <div className='item-img'>
                                 <img src={gallery} className="img-fluid" alt={id} />

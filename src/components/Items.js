@@ -9,7 +9,7 @@ export class Items extends Component {
                     Category Name
                 </div>
                 <div className='row catalogue'>
-                    <Item />
+                    <Item category={this.props.category}/>
                 </div>
             </main>
         )
