@@ -1,6 +1,8 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Raleway';
+  font-style: normal;
 }
 
 header .nav-box {
@@ -20,8 +22,6 @@ header ul.nav {
 
 header ul.nav li {
   cursor: pointer;
-  font-family: 'Raleway';
-  font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 120%;
@@ -41,8 +41,6 @@ header ul.nav li.active {
 
 header .currency {
   position: relative;
-  font-family: 'Raleway';
-  font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 160%;
@@ -64,6 +62,37 @@ header .nav-right-part {
   align-items: center;
 }
 
+header .nav-right-part .cart-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+header .nav-right-part .cart-icon .cart {
+  position: absolute;
+  width: 325px;
+  right: 0;
+  background-color: #5ECE7B;
+  bottom: -118px;
+}
+
+header .nav-right-part .cart-icon .cart .row {
+  display: flex;
+}
+
+header .nav-right-part .cart-icon .cart .cart-items{
+  margin: 32px 16px 32px 16px;
+}
+
+header .nav-right-part .cart-icon .cart .cart-heading {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+}
+
+header .nav-right-part .cart-icon .cart .cart-heading-count{
+  font-weight: 500;
+}
+
 main.category {
   margin-top: 80px;
   padding: 0 101px 0 101px;
@@ -74,8 +103,6 @@ main .row {
 }
 
 main .heading {
-  font-family: 'Raleway';
-  font-style: normal;
   font-weight: 400;
   font-size: 42px;
   line-height: 160%;
@@ -120,8 +147,6 @@ main.category .catalogue {
 }
 
 .item .unavailable-label {
-  font-family: 'Raleway';
-  font-style: normal;
   font-weight: 400;
   font-size: 24px;
   line-height: 160%;
@@ -146,16 +171,12 @@ main.category .catalogue {
 }
 
 .item .item-content h2 {
-  font-family: 'Raleway';
-  font-style: normal;
   font-weight: 300;
   font-size: 18px;
   line-height: 160%;
 }
 
 .item .price {
-  font-family: 'Raleway';
-  font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 160%;
