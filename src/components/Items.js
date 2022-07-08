@@ -6,7 +6,7 @@ export class Items extends Component {
         return (
             <main className='category'>
                 <div className='row heading'>
-                    Category Name
+                    {this.props.category.toUpperCase()}
                 </div>
                 <div className='row catalogue'>
                     <Item category={this.props.category}/>

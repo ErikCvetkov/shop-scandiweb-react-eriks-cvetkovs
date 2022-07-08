@@ -9,7 +9,6 @@ class App extends React.Component {
     super(props)
     this.state = {
       orders: [],
-      allItems: [],
       currentCategory: "all",
     }
     this.chooseCategory = this.chooseCategory.bind(this)

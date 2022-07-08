@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import GetAllItems from './GetAllItems';
 import { gql } from '@apollo/client';
 import { Query } from '@apollo/client/react/components';
 import Items from './Items';
@@ -27,7 +26,7 @@ query items {
 `;
 
 
-const filter = (data,filter) => (filter === "all") ? (data.category.products) : (data.category.products.filter((item) => item.category === filter))
+const filter = (data, filter) => (filter === "all") ? (data.category.products) : (data.category.products.filter((item) => item.category === filter))
 
 
 
@@ -38,11 +37,14 @@ export class Item extends Component {
                 {({ loading, error, data }) => {
                     if (loading) return <p>Loading...</p>;
                     if (error) return <p>Error :(</p>;
-                    const items = filter(data,this.props.category)
-                    return items.map(({ id, name, prices, gallery }) => (
+                    const items = filter(data, this.props.category)
+                    return items.map(({ id, name, prices, gallery, inStock }) => (
                         <div className='item' key={id}>
                             <div className='item-img'>
-                                <img src={gallery} className="img-fluid" alt={id} />
+                                <img src={gallery} className={`img-fluid ${inStock ? '' : 'unavailable'}`} alt={id} />
+                                {!inStock &&
+                                        <div className='unavailable-label'>OUT OF STOCK</div>
+                                }
                                 <div className='cart-button'>
                                     <svg className='cart-logo' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M23.4736 5.8484C23.0186 5.29247 22.3109 4.95457 21.5785 4.95457H6.19066L5.71097 3.16691C5.43262 2.12772 4.47323 1.40283 3.36082 1.40283H0.783719C0.354361 1.40283 0 1.74072 0 2.15227C0 2.56284 0.353351 2.9017 0.783719 2.9017H3.36082C3.73985 2.9017 4.06854 3.14333 4.1692 3.50577L7.25167 15.2494C7.53003 16.2886 8.48941 17.0135 9.60182 17.0135H19.6833C20.7947 17.0135 21.7808 16.2886 22.0335 15.2494L23.9286 7.80699C24.1053 7.1293 23.9543 6.40442 23.4736 5.84848L23.4736 5.8484ZM22.3879 7.46712L20.4928 14.9095C20.3921 15.272 20.0634 15.5136 19.6844 15.5136H9.60185C9.22282 15.5136 8.89413 15.272 8.79347 14.9095L6.59533 6.47717H21.5796C21.8323 6.47717 22.085 6.59798 22.237 6.79148C22.388 6.98403 22.463 7.22566 22.388 7.46729L22.3879 7.46712Z" fill="white" />
