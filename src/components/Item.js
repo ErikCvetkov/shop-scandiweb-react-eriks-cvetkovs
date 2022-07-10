@@ -22,9 +22,9 @@ export class Item extends Component {
                     <h2>{item.name}</h2>
                     {
                         item.prices.map(({ amount, currency }) => {
-                            if (currency.symbol === "$") return (
+                            if (currency.symbol === this.props.currency) return (
                                 <span className='price' key={item.id}>
-                                    {amount} {currency.symbol}
+                                    {currency.symbol} {amount}
                                 </span>
                             );
                         })

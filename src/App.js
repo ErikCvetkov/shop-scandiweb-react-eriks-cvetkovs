@@ -10,16 +10,18 @@ class App extends React.Component {
     this.state = {
       orders: [],
       currentCategory: "all",
+      currentCurrency: "$",
     }
     this.chooseCategory = this.chooseCategory.bind(this)
     this.addItemToOrder = this.addItemToOrder.bind(this)
+    this.chooseCurrency = this.chooseCurrency.bind(this)
   }
 
   render() {
     return (
       <div>
-        <Header chooseCategory={this.chooseCategory} orders={this.state.orders}/>
-        <Items category={this.state.currentCategory} addItemToOrder={this.addItemToOrder} />
+        <Header chooseCategory={this.chooseCategory} orders={this.state.orders} chooseCurrency={this.chooseCurrency} currency={this.state.currentCurrency}/>
+        <Items category={this.state.currentCategory} addItemToOrder={this.addItemToOrder} currency={this.state.currentCurrency} />
       </div>
     )
   }
@@ -27,6 +29,12 @@ class App extends React.Component {
   chooseCategory(category) {
     this.setState({
       currentCategory: category
+    })
+  }
+
+  chooseCurrency(currency) {
+    this.setState({
+      currentCurrency: currency
     })
   }
 
@@ -38,9 +46,7 @@ class App extends React.Component {
       }
     })
     if (!isInArray) {
-      this.setState({ orders: [...this.state.orders, item] }, () => {
-        console.log(this.state.orders)
-      })
+      this.setState({ orders: [...this.state.orders, item] })
     }
   }
 }

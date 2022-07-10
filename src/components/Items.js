@@ -51,7 +51,7 @@ export class Items extends Component {
                             if (error) return <p>Error :(</p>;
                             const items = filter(data, this.props.category)
                             return items.map( el => (
-                                <Item key={el.id} item={el} addItemToOrder={this.props.addItemToOrder}/>
+                                <Item key={el.id} item={el} addItemToOrder={this.props.addItemToOrder} currency={this.props.currency}/>
                             ));
                         }}
                     </Query>
