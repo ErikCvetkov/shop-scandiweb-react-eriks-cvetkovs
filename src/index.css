@@ -170,6 +170,11 @@ main.category .catalogue {
   padding-bottom: 191px;
 }
 
+main.category .catalogue a{
+  text-decoration: none;
+  color: #1D1F22;
+}
+
 .item {
   display: flex;
   flex-direction: column;
@@ -183,7 +188,6 @@ main.category .catalogue {
 
 .item:hover {
   box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-  cursor: pointer;
 }
 
 .item .item-img {

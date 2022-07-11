@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PDP from './PDP';
+import { Link } from 'react-router-dom';
 
 export class Item extends Component {
     render() {
@@ -6,7 +8,9 @@ export class Item extends Component {
         return (
             <div className='item' key={item.id}>
                 <div className='item-img'>
-                    <img src={item.gallery} className={`img-fluid ${item.inStock ? '' : 'unavailable'}`} alt={item.id} />
+                    <Link to="/item">
+                        <img src={item.gallery} className={`img-fluid ${item.inStock ? '' : 'unavailable'}`} alt={item.id} />
+                    </Link>
                     {!item.inStock &&
                         <div className='unavailable-label'>OUT OF STOCK</div>
                     }
@@ -19,7 +23,9 @@ export class Item extends Component {
                     </div>
                 </div>
                 <div className='item-content'>
-                    <h2>{item.name}</h2>
+                    <Link to="/item">
+                        <h2>{item.name}</h2>
+                    </Link>
                     {
                         item.prices.map(({ amount, currency }) => {
                             if (currency.symbol === this.props.currency) return (

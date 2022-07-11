@@ -2,6 +2,8 @@ import React from "react";
 import './App.css';
 import Header from "./components/Header";
 import Items from "./components/Items";
+import PDP from "./components/PDP";
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -19,13 +21,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Header chooseCategory={this.chooseCategory} orders={this.state.orders} chooseCurrency={this.chooseCurrency} currency={this.state.currentCurrency}/>
-        <Items category={this.state.currentCategory} addItemToOrder={this.addItemToOrder} currency={this.state.currentCurrency} />
-      </div>
+      <Router>
+        <div>
+          <Header chooseCategory={this.chooseCategory} orders={this.state.orders} chooseCurrency={this.chooseCurrency} currency={this.state.currentCurrency} />
+        </div>
+        <Routes>
+          <Route path="/" element={<Items category={this.state.currentCategory} addItemToOrder={this.addItemToOrder} currency={this.state.currentCurrency}/>}/>
+          <Route path="/item" element={<PDP />} />
+        </Routes>
+      </Router>
     )
   }
-
   chooseCategory(category) {
     this.setState({
       currentCategory: category

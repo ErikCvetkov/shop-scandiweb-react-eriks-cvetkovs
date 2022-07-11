@@ -15,28 +15,18 @@ export class Categories extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            tabs: null,
             activeTab: 'all'
         }
-        
-    }
-
-    addCategories(data){
-        this.state.tabs = data.categories.map((category) => category.name)
     }
 
     handleClick(event, currentTab){
         event.preventDefault();
-        const newTabs = this.state.tabs;
-        newTabs.forEach((tab, index) => {
-            newTabs[index] = tab === currentTab ? "active" : "inactive"
-        });
-        this.setState({ tabs: newTabs, activeTab: currentTab });
+        this.setState({ activeTab: currentTab });
     }
 
     navbarTabChange(event,tab){
-        this.props.chooseCategory(tab)
         this.handleClick(event,tab)
+        this.props.chooseCategory(tab)
     }
 
     render() {
@@ -45,14 +35,13 @@ export class Categories extends Component {
                 {({ loading, error, data }) => {
                     if (loading) return <p>Loading...</p>;
                     if (error) return <p>Error :(</p>;
-                    this.addCategories(data)
                     return (
                         <ul className='nav'>
                             {
-                                this.state.tabs.map((tab,index) => {
+                                data.categories.map((category) => {
                                     return (
-                                        <li key={index} className={`${tab === this.state.activeTab ? 'active' : ''}`} onClick={ event => this.navbarTabChange(event,tab)}>
-                                            {tab.toUpperCase()}
+                                        <li key={category.name} className={`${category.name === this.state.activeTab ? 'active' : ''}`} onClick={ event => this.navbarTabChange(event,category.name)}>
+                                            {category.name.toUpperCase()}
                                         </li>
                                     );
                                 })
