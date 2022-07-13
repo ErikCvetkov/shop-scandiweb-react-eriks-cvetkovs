@@ -65,24 +65,24 @@ export class PDP extends Component {
                           case "Size":
                             return (
                               <div key={item.id}>
-                                <input name={attribute.name} type="radio" id={item.value} value={item.value} className='input-size input-hidden' />
-                                <label htmlFor={item.value} className={`attribute-value ${attribute.name}`}>{item.displayValue}</label>
+                                <input name={attribute.name} type="radio" id={`${attribute.name} ${index}`} value={item.value} className='input-size input-hidden' />
+                                <label htmlFor={`${attribute.name} ${index}`} className={`attribute-value ${attribute.name}`}>{item.displayValue}</label>
                               </div>
                             )
                             break;
                           case "Color":
                             return (
                               <div key={item.id}>
-                                <input name={attribute.name} type="radio" id={item.value} value={item.value} className='input-color input-hidden' />
-                                <label htmlFor={item.value} className={`attribute-value ${attribute.name}`} style={{ backgroundColor: item.value }}></label>
+                                <input name={attribute.name} type="radio" id={`${attribute.name} ${index}`} value={item.value} className='input-color input-hidden' />
+                                <label htmlFor={`${attribute.name} ${index}`} className={`attribute-value ${attribute.name}`} style={{ backgroundColor: item.value }}></label>
                               </div>
                             )
                             break;
                           default:
                             return (
                               <div key={item.id}>
-                                <input name={attribute.name} type="radio" id={item.value} value={item.value} className='input-size input-hidden' />
-                                <label htmlFor={item.value} className='attribute-value default'>{item.displayValue}</label>
+                                <input name={attribute.name} type="radio" id={`${attribute.name} ${index}`} value={item.value} className='input-size input-hidden' />
+                                <label htmlFor={`${attribute.name} ${index}`} className='attribute-value default'>{item.displayValue}</label>
                               </div>
                             )
                         }
