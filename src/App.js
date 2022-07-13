@@ -27,7 +27,7 @@ class App extends React.Component {
         </div>
         <Routes>
           <Route path="/" element={<Items category={this.state.currentCategory} addItemToOrder={this.addItemToOrder} currency={this.state.currentCurrency}/>}/>
-          <Route path="/item" element={<PDP />} />
+          <Route path="/item/:id" element={<PDP currency={this.state.currentCurrency}/>}/>
         </Routes>
       </Router>
     )

@@ -29,6 +29,8 @@ query items {
             }
         }
         inStock
+        brand
+        description
       }
     }
   }
