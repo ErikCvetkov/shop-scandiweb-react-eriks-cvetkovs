@@ -5,14 +5,16 @@ import Price from './Price';
 export class PDP extends Component {
   constructor(props) {
     super(props)
+    const item = this.props.params.location.state.item
     this.state = {
-      currantImage: 0
+      currantImage: 0,
+      inStock: item.inStock
     }
     this.updateImage = this.updateImage.bind(this)
   }
 
-  updateImage(index){
-    this.setState({currantImage:index})
+  updateImage(index) {
+    this.setState({ currantImage: index })
   }
 
 
@@ -33,7 +35,10 @@ export class PDP extends Component {
           }
         </div>
         <div className='item-card'>
-          <img src={item.gallery[this.state.currantImage]} className="img-fluid" />
+          <img src={item.gallery[this.state.currantImage]} className={`img-fluid ${item.inStock ? '' : 'unavailable'}`} />
+          {!this.state.inStock &&
+            <div className='unavailable-label'>OUT OF STOCK</div>
+          }
         </div>
         <div className='item-info'>
           <div className='info-heading'>
@@ -55,12 +60,32 @@ export class PDP extends Component {
                   </div>
                   <div className='attribute-values'>
                     {
-                      attribute.items.map((item) => {
-                        return (
-                          <div className={`attribute-value ${attribute.name}`} key={item.id}>
-                            {item.displayValue}
-                          </div>
-                        )
+                      attribute.items.map((item, index) => {
+                        switch (attribute.name) {
+                          case "Size":
+                            return (
+                              <div key={item.id}>
+                                <input name={attribute.name} type="radio" id={item.value} value={item.value} className='input-size input-hidden' />
+                                <label htmlFor={item.value} className={`attribute-value ${attribute.name}`}>{item.displayValue}</label>
+                              </div>
+                            )
+                            break;
+                          case "Color":
+                            return (
+                              <div key={item.id}>
+                                <input name={attribute.name} type="radio" id={item.value} value={item.value} className='input-color input-hidden' />
+                                <label htmlFor={item.value} className={`attribute-value ${attribute.name}`} style={{ backgroundColor: item.value }}></label>
+                              </div>
+                            )
+                            break;
+                          default:
+                            return (
+                              <div key={item.id}>
+                                <input name={attribute.name} type="radio" id={item.value} value={item.value} className='input-size input-hidden' />
+                                <label htmlFor={item.value} className='attribute-value default'>{item.displayValue}</label>
+                              </div>
+                            )
+                        }
                       })
                     }
                   </div>
@@ -73,12 +98,12 @@ export class PDP extends Component {
               Price:
             </div>
             <div className='price-amount'>
-              <Price currency={this.props.currency} item={item}/>
+              <Price currency={this.props.currency} item={item} />
             </div>
           </div>
-          <div className='add-to-cart-button'>
+          <button className='add-to-cart-button' disabled={!this.state.inStock}>
             ADD TO CART
-          </div>
+          </button>
           <div className='item-description' dangerouslySetInnerHTML={{ __html: item.description }}></div>
         </div>
       </main>
