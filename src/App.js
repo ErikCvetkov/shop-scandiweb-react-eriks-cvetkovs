@@ -20,14 +20,15 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.orders)
     return (
       <Router>
         <div>
           <Header chooseCategory={this.chooseCategory} orders={this.state.orders} chooseCurrency={this.chooseCurrency} currency={this.state.currentCurrency} />
         </div>
         <Routes>
-          <Route path="/" element={<Items category={this.state.currentCategory} addItemToOrder={this.addItemToOrder} currency={this.state.currentCurrency}/>}/>
-          <Route path="/item/:id" element={<PDP currency={this.state.currentCurrency}/>}/>
+          <Route path="/" element={<Items category={this.state.currentCategory} currency={this.state.currentCurrency}/>}/>
+          <Route path="/item/:id" element={<PDP addItemToOrder={this.addItemToOrder} currency={this.state.currentCurrency}/>}/>
         </Routes>
       </Router>
     )
