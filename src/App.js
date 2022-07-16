@@ -63,7 +63,6 @@ class App extends React.Component {
         }
       }
     })
-    item.count = 1
     return [isInArray, itemIndex]
   }
 
@@ -71,7 +70,9 @@ class App extends React.Component {
   addItemToOrder(item) {
     let isInArray = this.itemIsInArray(item, this.state.orders)
     if (!isInArray[0]) {
-      this.setState({ orders: [...this.state.orders, item] })
+      const order = JSON.parse(JSON.stringify(item))
+      order.count = 1
+      this.setState({ orders: [...this.state.orders, order] })
     } else {
       let orders = this.state.orders
       let order = orders[isInArray[1]]
