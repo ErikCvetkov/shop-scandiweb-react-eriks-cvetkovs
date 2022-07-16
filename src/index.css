@@ -146,6 +146,25 @@ header .nav-right-part .cart-icon .cart .cart-heading-count {
   font-weight: 500;
 }
 
+header .cart-icon .cartItemsCount {
+  position: absolute;
+  bottom: 12px;
+  left: 13px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1D1F22;
+  color: #FFFFFF;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  width: 20px;
+  height: 20px;
+}
+
 main {
   margin-top: 80px;
   padding: 0 101px 0 101px;
@@ -420,6 +439,12 @@ main.category .catalogue a {
   outline: 1px solid #5ECE7B;
 }
 
+.pdp span.error{
+  color:#e7513a;
+  font-size: 13px;
+}
+
 .row {
   display: flex;
 }
+

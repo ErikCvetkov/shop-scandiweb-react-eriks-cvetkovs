@@ -20,7 +20,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.orders)
     return (
       <Router>
         <div>

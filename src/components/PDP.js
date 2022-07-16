@@ -9,7 +9,9 @@ export class PDP extends Component {
     this.state = {
       currantImage: 0,
       inStock: item.inStock,
-      item:this.props.params.location.state.item
+      item: this.props.params.location.state.item,
+      attributes: {},
+      errorFields: []
     }
     this.updateImage = this.updateImage.bind(this)
   }
@@ -18,32 +20,60 @@ export class PDP extends Component {
     this.setState({ currantImage: index })
   }
 
+  checkAttributes() {
+    let isValid = true
+    let errorFields = []
+    Object.keys(this.state.attributes).map((key) => {
+      if(this.state.attributes[key] === null) {
+        isValid = false
+        errorFields.push(key)
+      }
+    });
+    this.setState({errorFields:errorFields},()=>{
+      console.log(this.state)
+    })
+    return isValid
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
-    const orderItem = JSON.parse(JSON.stringify(this.state.item))
-    orderItem.attributes.map((attribute)=>{
 
-      const selectedValue = attribute.items.filter((item) => item.value === this.state[attribute.name])
-      attribute.item = selectedValue[0]
-      delete attribute.items
+    if(this.checkAttributes()){
+      const orderItem = JSON.parse(JSON.stringify(this.state.item))
+      orderItem.attributes.map((attribute) => {
+        const selectedValue = this.state.attributes[attribute.name]
+        attribute.userValue = selectedValue
+        delete attribute.items
+      })
+      this.props.addItemToOrder(orderItem)
+      console.log(orderItem)
+    } 
+  }
+
+  componentDidMount() {
+    this.state.item.attributes.map((attribute) => {
+      this.setState(prevState => ({
+        attributes: {
+          ...prevState.attributes,
+          [attribute.name]: null
+        }
+      }))
+
     })
-    this.props.addItemToOrder(orderItem)
   }
 
 
   handleInputChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    }, () => {
-      // console.log(this.state)
-    })
-  
+    this.setState(prevState => ({
+      attributes: {
+        ...prevState.attributes,
+        [event.target.name]: event.target.value
+      }
+    }))
   }
 
   render() {
     const item = this.state.item
-    // console.log(item)
-    // console.log(this.state.product)
     return (
       <main className='pdp'>
         <form onSubmit={this.handleSubmit} className="row">
@@ -80,7 +110,10 @@ export class PDP extends Component {
                 return (
                   <div className='attribute' key={attribute.id}>
                     <div className='attribute-name'>
-                      {attribute.name}:
+                      {attribute.name}
+                      { this.state.errorFields.includes(attribute.name) ? (
+                        <span className='error'> (Select value) </span>
+                      ) : null } :
                     </div>
                     <div className='attribute-values'>
                       {

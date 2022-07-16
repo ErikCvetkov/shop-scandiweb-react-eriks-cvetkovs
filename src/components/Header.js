@@ -52,7 +52,7 @@ export class Header extends Component {
                     </svg>
                     <div className='nav-right-part'>
                         <Currency activeElement={this.state.activeElement} getActiveElement={this.getActiveElement} id={"currancy"} chooseCurrency={this.props.chooseCurrency} currency={this.props.currency}  />
-                        <Cart id={"cart"} activeElement={this.state.activeElement} getActiveElement={this.getActiveElement} />
+                        <Cart id={"cart"} activeElement={this.state.activeElement} getActiveElement={this.getActiveElement} orders={this.props.orders} />
                     </div>
                 </div>
                 {this.state.activeElement === "cart" &&
