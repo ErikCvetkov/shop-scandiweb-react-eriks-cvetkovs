@@ -20,14 +20,16 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.orders)
+
     return (
       <Router>
         <div>
           <Header chooseCategory={this.chooseCategory} orders={this.state.orders} chooseCurrency={this.chooseCurrency} currency={this.state.currentCurrency} />
         </div>
         <Routes>
-          <Route path="/" element={<Items category={this.state.currentCategory} currency={this.state.currentCurrency}/>}/>
-          <Route path="/item/:id" element={<PDP addItemToOrder={this.addItemToOrder} currency={this.state.currentCurrency}/>}/>
+          <Route path="/" element={<Items addItemToOrder={this.addItemToOrder} category={this.state.currentCategory} currency={this.state.currentCurrency} />} />
+          <Route path="/item/:id" element={<PDP addItemToOrder={this.addItemToOrder} currency={this.state.currentCurrency} />} />
         </Routes>
       </Router>
     )
@@ -44,15 +46,38 @@ class App extends React.Component {
     })
   }
 
-  addItemToOrder(item) {
+  itemIsInArray(item, array) {
     let isInArray = false
-    this.state.orders.forEach(el => {
-      if (el.id === item.id) {
-        isInArray = true
+    let itemIndex = null
+    array.forEach((el, index) => {
+      let similarAttrs = 0
+      if (item.name === el.name) {
+        el.attributes.map((attribute) => {
+          if (attribute.userValue === item.attributes.find(element => element.name === attribute.name).userValue) {
+            similarAttrs++
+          }
+        })
+        if (similarAttrs === el.attributes.length) {
+          isInArray = true
+          itemIndex = index
+        }
       }
     })
-    if (!isInArray) {
+    item.count = 1
+    return [isInArray, itemIndex]
+  }
+
+
+  addItemToOrder(item) {
+    let isInArray = this.itemIsInArray(item, this.state.orders)
+    if (!isInArray[0]) {
       this.setState({ orders: [...this.state.orders, item] })
+    } else {
+      let orders = this.state.orders
+      let order = orders[isInArray[1]]
+      order.count = ++order.count
+      orders[isInArray[1]] = order
+      this.setState({orders:orders})
     }
   }
 }

@@ -9,7 +9,7 @@ export class PDP extends Component {
     this.state = {
       currantImage: 0,
       inStock: item.inStock,
-      item: this.props.params.location.state.item,
+      item: item,
       attributes: {},
       errorFields: []
     }
@@ -23,22 +23,23 @@ export class PDP extends Component {
   checkAttributes() {
     let isValid = true
     let errorFields = []
-    Object.keys(this.state.attributes).map((key) => {
-      if(this.state.attributes[key] === null) {
-        isValid = false
-        errorFields.push(key)
-      }
-    });
-    this.setState({errorFields:errorFields},()=>{
-      console.log(this.state)
-    })
+    if (!this.state.inStock) {
+      isValid = false
+    } else {
+      Object.keys(this.state.attributes).map((key) => {
+        if (this.state.attributes[key] === null) {
+          isValid = false
+          errorFields.push(key)
+        }
+      });
+      this.setState({ errorFields: errorFields })
+    }
     return isValid
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
-
-    if(this.checkAttributes()){
+    if (this.checkAttributes()) {
       const orderItem = JSON.parse(JSON.stringify(this.state.item))
       orderItem.attributes.map((attribute) => {
         const selectedValue = this.state.attributes[attribute.name]
@@ -46,8 +47,7 @@ export class PDP extends Component {
         delete attribute.items
       })
       this.props.addItemToOrder(orderItem)
-      console.log(orderItem)
-    } 
+    }
   }
 
   componentDidMount() {
@@ -111,9 +111,9 @@ export class PDP extends Component {
                   <div className='attribute' key={attribute.id}>
                     <div className='attribute-name'>
                       {attribute.name}
-                      { this.state.errorFields.includes(attribute.name) ? (
+                      {this.state.errorFields.includes(attribute.name) ? (
                         <span className='error'> (Select value) </span>
-                      ) : null } :
+                      ) : null} :
                     </div>
                     <div className='attribute-values'>
                       {

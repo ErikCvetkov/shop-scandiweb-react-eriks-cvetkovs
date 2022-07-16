@@ -13,9 +13,16 @@
   width: 100%;
 }
 
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: #EEEEEE;
+  z-index: 5;
+}
+
 header .nav-box {
   background-color: #FFFFFF;
-  z-index: 4;
   position: relative;
   height: 80px;
   display: flex;
@@ -71,10 +78,8 @@ header .currency .currency-switcher {
 }
 
 header .backgound-overlay {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  height: 100vh;
+  width: 100%;
   background: rgba(57, 55, 72, 0.22);
   position: absolute;
   z-index: 2;
@@ -116,6 +121,9 @@ header .nav-right-part {
 
 header .nav-right-part .cart-icon {
   position: relative;
+}
+
+header .nav-right-part .cart-icon .cart-pointer {
   cursor: pointer;
 }
 
@@ -123,9 +131,10 @@ header .nav-right-part .cart-icon .cart {
   position: absolute;
   width: 325px;
   right: 0;
-  background-color: #5ECE7B;
+  background-color: #FFFFFF;
   top: 51px;
   z-index: 4;
+  overflow: hidden;
 }
 
 header .nav-right-part .cart-icon .cart .row {
@@ -144,6 +153,8 @@ header .nav-right-part .cart-icon .cart .cart-heading {
 
 header .nav-right-part .cart-icon .cart .cart-heading-count {
   font-weight: 500;
+  line-height: 160%;
+
 }
 
 header .cart-icon .cartItemsCount {
@@ -165,8 +176,30 @@ header .cart-icon .cartItemsCount {
   height: 20px;
 }
 
+.cart-item-info {
+  width: 136px;
+  max-height: 677px;
+  overflow: auto;
+}
+
+.cart-item-info .name {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  padding-top: 30px;
+}
+
+.cart-item-info .price {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  padding: 4px 0 8px 0;
+}
+
 main {
-  margin-top: 80px;
+  padding-top: 160px !important;
   padding: 0 101px 0 101px;
 }
 
@@ -439,12 +472,11 @@ main.category .catalogue a {
   outline: 1px solid #5ECE7B;
 }
 
-.pdp span.error{
-  color:#e7513a;
+.pdp span.error {
+  color: #e7513a;
   font-size: 13px;
 }
 
 .row {
   display: flex;
 }
-
