@@ -38,7 +38,7 @@ export class Order extends Component {
                     {
                         el.attributes.map((product) => {
                             return (
-                                <div className='attribute'>
+                                <div className='attribute' key={`attribute ${el.id} ${el.index} ${product.name}`}>
                                     <div className='attribute-name'>
                                         {product.name}:
                                     </div>
@@ -81,16 +81,16 @@ export class Order extends Component {
                     <div className='item-img' style={{
                         backgroundImage: `url(${el.gallery[this.state.currantImage]})`
                     }}>
-                        {this.props.id === 'cartOverview' &&
+                        {this.props.id === 'cartOverview' && this.props.el.gallery.length > 1 &&
                             <div className='switcher'>
                                 <button className='switcher-button' onClick={()=>this.switchImage('left')}>
                                     <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.25 1.06857L1.625 6.6876L7.25 12.3066" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M7.25 1.06857L1.625 6.6876L7.25 12.3066" stroke="white" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
                                     </svg>
                                 </button>
                                 <button className='switcher-button' onClick={()=>this.switchImage('right')}>
                                     <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M0.75 1.06808L6.375 6.68711L0.75 12.3062" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M0.75 1.06808L6.375 6.68711L0.75 12.3062" stroke="white" strokeWidth="1.5" stroke-linecap="round" strokeLinejoin="round" />
                                     </svg>
                                 </button>
                             </div>

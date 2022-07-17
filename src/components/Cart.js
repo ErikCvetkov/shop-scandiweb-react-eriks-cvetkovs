@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Price from './Price';
 import { Link } from 'react-router-dom';
+import Order from './Order';
 
 export class Cart extends Component {
     constructor(props) {
@@ -50,61 +51,7 @@ export class Cart extends Component {
                                         {
                                             this.props.orders.map((el, index) => {
                                                 return (
-                                                    <div key={`${el.id} ${index}`} className="cart-item row">
-                                                        <div className='cart-item-info'>
-                                                            <div className='name'>
-                                                                {el.name}
-                                                            </div>
-                                                            <div className='price'>
-                                                                <Price currency={this.props.currency} item={el} />
-                                                            </div>
-                                                            {
-                                                                el.attributes.map((product) => {
-                                                                    return (
-                                                                        <div className='attribute'>
-                                                                            <div className='attribute-name'>
-                                                                                {product.name}:
-                                                                            </div>
-                                                                            <div className='attribute-values row'>
-                                                                                {
-                                                                                    product.items.map((item, index) => {
-                                                                                        switch (product.name) {
-                                                                                            case "Size":
-                                                                                                return (
-                                                                                                    <div key={`cart ${item.id}`} className={`attribute-value ${product.name} ${item.displayValue === product.userValue ? 'active' : null}`}>
-                                                                                                        {item.displayValue}
-                                                                                                    </div>
-                                                                                                )
-                                                                                            case "Color":
-                                                                                                return (
-                                                                                                    <div key={`cart ${item.id}`} className={`attribute-value ${product.name} ${item.value === product.userValue ? 'active' : null}`} style={{ backgroundColor: item.value }}>
-                                                                                                    </div>
-                                                                                                )
-                                                                                            default:
-                                                                                                return (
-                                                                                                    <div key={`cart ${item.id}`} className={`attribute-value default ${item.displayValue === product.userValue ? 'active' : ''}`}>
-                                                                                                        {item.displayValue}
-                                                                                                    </div>
-                                                                                                )
-                                                                                        }
-                                                                                    })
-                                                                                }
-                                                                            </div>
-                                                                        </div>
-                                                                    )
-                                                                })
-                                                            }
-                                                        </div>
-                                                        <div className='cart-item-count'>
-                                                            <button className='cart-button-count' onClick={()=>this.props.updateOrderCount(index,true)}>+</button>
-                                                            <span>{el.count}</span>
-                                                            <button className='cart-button-count' onClick={()=>this.props.updateOrderCount(index,false)}>-</button>
-                                                        </div>
-                                                        <div className='cart-item-img' style={{
-                                                            backgroundImage: `url(${el.gallery[0]})`
-                                                        }}></div>
-                                                    </div>
-
+                                                    <Order key={`cart ${el.id} ${index}`} updateOrderCount={this.props.updateOrderCount} currency={this.props.currency} el={el} index={index} id={'cart'}/>
                                                 )
                                             })
                                         }

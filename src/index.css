@@ -486,21 +486,21 @@ header .cart-icon .cartItemsCount {
   height: 20px;
 }
 
-.cart .cart-item-info {
+.cart .item-info {
   width: 136px;
   max-height: 677px;
   overflow: auto;
 }
 
-.cart .cart-item {
+.cart .item {
   padding-top: 30px;
 }
 
-.cart .cart-item:first-child {
+.cart .item:first-child {
   padding-top: 0;
 }
 
-.cart .cart-item-info .name {
+.cart .item-info .name {
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 300;
@@ -508,7 +508,7 @@ header .cart-icon .cartItemsCount {
   line-height: 160%;
 }
 
-.cart .cart-item-info .price {
+.cart .item-info .price {
   font-weight: 500;
   font-size: 16px;
   line-height: 160%;
@@ -517,6 +517,15 @@ header .cart-icon .cartItemsCount {
 
 .cart .attribute {
   padding-bottom: 8px;
+}
+
+.cart .item-order{
+  display: flex;
+  padding-bottom: 40px;
+}
+
+.cart .item-order:last-child{
+  padding-bottom: 0;
 }
 
 .cart .attribute-value {
@@ -565,7 +574,7 @@ header .cart-icon .cartItemsCount {
   outline: 1px solid #5ECE7B;
 }
 
-.cart .cart-item-count {
+.cart .item-count {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -574,7 +583,7 @@ header .cart-icon .cartItemsCount {
   padding: 0 10px 0 10px;
 }
 
-.cart .cart-item-count .cart-button-count {
+.cart .item-count .button-count {
   width: 24px;
   height: 24px;
   border: 1px solid #1D1F22;
@@ -582,7 +591,11 @@ header .cart-icon .cartItemsCount {
   cursor: pointer;
 }
 
-.cart .cart-item-img {
+.cart .group{
+  display: flex;
+}
+
+.cart .item-img {
   height: 190px;
   width: 121px;
   background-position: center;
@@ -655,16 +668,12 @@ header .cart-icon .cartItemsCount {
   padding: 25px 0 25px 0;
 }
 
-.order-list .order:last-child {
-  border: 1px solid black;
-  /* border-bottom: 1px solid #E5E5E5; */
-}
-
 .order .item-order {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
+
 
 .order .name {
   font-weight: 600;
@@ -783,8 +792,8 @@ header .cart-icon .cartItemsCount {
 .item-img .switcher {
   display: flex;
   position: absolute;
-  bottom: 5px;
-  right: 5px;
+  bottom: 16px;
+  right: 16px;
 }
 
 .switcher .switcher-button {
@@ -801,6 +810,7 @@ header .cart-icon .cartItemsCount {
 
 .order-payment {
   padding-top: 32px;
+  border-top: 1px solid #E5E5E5;
 }
 
 .order-payment div {
