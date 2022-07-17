@@ -6,12 +6,12 @@ export class Price extends Component {
         return (
             <div>
                 {
-                    item.prices.forEach(({ amount, currency }) => {
-                        if (currency.symbol === this.props.currency) return (
+                    item.prices.map((price) => {
+                        if (price.currency.symbol === this.props.currency){ return (
                             <span className='price' key={item.id}>
-                                {currency.symbol} {amount}
+                                {price.currency.symbol} {price.amount}
                             </span>
-                        );
+                        )}
                     })
                 }
             </div>
