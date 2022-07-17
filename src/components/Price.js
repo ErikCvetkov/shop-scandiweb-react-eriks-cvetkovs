@@ -6,7 +6,7 @@ export class Price extends Component {
         return (
             <div>
                 {
-                    item.prices.map(({ amount, currency }) => {
+                    item.prices.forEach(({ amount, currency }) => {
                         if (currency.symbol === this.props.currency) return (
                             <span className='price' key={item.id}>
                                 {currency.symbol} {amount}

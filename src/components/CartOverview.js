@@ -14,7 +14,7 @@ export class CartOverview extends Component {
                     <div className='order-list'>
                         {this.props.orders.map((order, index) => {
                             return (
-                                <div className='order' key={`cartOverview ${order.id}`}>
+                                <div className='order' key={`cartOverview ${order.id} ${index}`}>
                                     <Order updateOrderCount={this.props.updateOrderCount} currency={this.props.currency} el={order} index={index} id={'cartOverview'} />
                                 </div>
                             )

@@ -26,7 +26,7 @@ export class PDP extends Component {
     if (!this.state.inStock) {
       isValid = false
     } else {
-      Object.keys(this.state.attributes).map((key) => {
+      Object.keys(this.state.attributes).forEach((key) => {
         if (this.state.attributes[key] === null) {
           isValid = false
           errorFields.push(key)
@@ -41,7 +41,7 @@ export class PDP extends Component {
     event.preventDefault()
     if (this.checkAttributes()) {
       const orderItem = JSON.parse(JSON.stringify(this.state.item))
-      orderItem.attributes.map((attribute) => {
+      orderItem.attributes.forEach((attribute) => {
         const selectedValue = this.state.attributes[attribute.name]
         attribute.userValue = selectedValue
       })
@@ -50,7 +50,7 @@ export class PDP extends Component {
   }
 
   componentDidMount() {
-    this.state.item.attributes.map((attribute) => {
+    this.state.item.attributes.forEach((attribute) => {
       this.setState(prevState => ({
         attributes: {
           ...prevState.attributes,
@@ -81,14 +81,14 @@ export class PDP extends Component {
               item.gallery.map((picture, index) => {
                 return (
                   <div className='item-picture-dpd' key={index} onClick={() => this.updateImage(index)}>
-                    <img src={picture} className="img-fluid" />
+                    <img src={picture} className="img-fluid" alt={picture}/>
                   </div>
                 )
               })
             }
           </div>
           <div className='item-card'>
-            <img src={item.gallery[this.state.currantImage]} className={`img-fluid ${item.inStock ? '' : 'unavailable'}`} />
+            <img src={item.gallery[this.state.currantImage]} className={`img-fluid ${item.inStock ? '' : 'unavailable'}`} alt={item.gallery[this.state.currantImage]} />
             {!this.state.inStock &&
               <div className='unavailable-label'>OUT OF STOCK</div>
             }

@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Items from "./components/Items";
 import PDP from "./components/PDP";
 import CartOverview from "./components/CartOverview"
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -55,7 +55,7 @@ class App extends React.Component {
     array.forEach((el, index) => {
       let similarAttrs = 0
       if (item.name === el.name) {
-        el.attributes.map((attribute) => {
+        el.attributes.forEach((attribute) => {
           if (attribute.userValue === item.attributes.find(element => element.name === attribute.name).userValue) {
             similarAttrs++
           }
@@ -105,8 +105,8 @@ class App extends React.Component {
   totalSum(){
     let orders = this.state.orders
     let totalSum = 0
-    orders.map((product) => {
-      product.prices.map((price) => {
+    orders.forEach((product) => {
+      product.prices.forEach((price) => {
         if (price.currency.symbol === this.state.currentCurrency) {
           totalSum = totalSum + price.amount * product.count
         }
@@ -119,7 +119,7 @@ class App extends React.Component {
     let orders = this.state.orders
     let count = 0
     if (orders !== null) {
-        orders.map((item) => {
+        orders.forEach((item) => {
             count += item.count
         })
         return count
