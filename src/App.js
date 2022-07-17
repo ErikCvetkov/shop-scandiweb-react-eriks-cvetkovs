@@ -23,6 +23,20 @@ class App extends React.Component {
     this.getCount = this.getCount.bind(this)
   }
 
+  componentWillMount(){
+    localStorage.getItem('orders') && this.setState({
+      orders: JSON.parse(localStorage.getItem('orders')),
+    })
+    localStorage.getItem('currentCurrency') && this.setState({
+      currentCurrency: JSON.parse(localStorage.getItem('currentCurrency')),
+    })
+  }
+
+  componentWillUpdate(nextProps,nextState){
+    localStorage.setItem('orders', JSON.stringify(nextState.orders))
+    localStorage.setItem('currentCurrency', JSON.stringify(nextState.currentCurrency))
+  }
+
   render() {
     return (
       <Router>
