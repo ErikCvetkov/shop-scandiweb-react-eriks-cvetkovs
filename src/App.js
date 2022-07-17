@@ -17,15 +17,14 @@ class App extends React.Component {
     this.chooseCategory = this.chooseCategory.bind(this)
     this.addItemToOrder = this.addItemToOrder.bind(this)
     this.chooseCurrency = this.chooseCurrency.bind(this)
+    this.updateOrderCount = this.updateOrderCount.bind(this)
   }
 
   render() {
-    console.log(this.state.orders)
-
     return (
       <Router>
         <div>
-          <Header chooseCategory={this.chooseCategory} orders={this.state.orders} chooseCurrency={this.chooseCurrency} currency={this.state.currentCurrency} />
+          <Header updateOrderCount={this.updateOrderCount} chooseCategory={this.chooseCategory} orders={this.state.orders} chooseCurrency={this.chooseCurrency} currency={this.state.currentCurrency} />
         </div>
         <Routes>
           <Route path="/" element={<Items addItemToOrder={this.addItemToOrder} category={this.state.currentCategory} currency={this.state.currentCurrency} />} />
@@ -78,6 +77,23 @@ class App extends React.Component {
       let order = orders[isInArray[1]]
       order.count = ++order.count
       orders[isInArray[1]] = order
+      this.setState({orders:orders})
+    }
+  }
+
+  updateOrderCount(index,move){
+    let orders = this.state.orders
+    let order = orders[index]
+    if(move){
+      order.count = ++order.count
+    } else {
+      order.count = --order.count
+    }
+    if(order.count<1){
+      orders.splice(index,1) 
+      this.setState({orders:orders})
+    } else {
+      orders[index] = order
       this.setState({orders:orders})
     }
   }

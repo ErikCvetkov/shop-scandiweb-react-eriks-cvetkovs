@@ -44,7 +44,6 @@ export class PDP extends Component {
       orderItem.attributes.map((attribute) => {
         const selectedValue = this.state.attributes[attribute.name]
         attribute.userValue = selectedValue
-        delete attribute.items
       })
       this.props.addItemToOrder(orderItem)
     }
@@ -126,7 +125,6 @@ export class PDP extends Component {
                                   <label htmlFor={`${attribute.name} ${index}`} className={`attribute-value ${attribute.name}`}>{item.displayValue}</label>
                                 </div>
                               )
-                              break;
                             case "Color":
                               return (
                                 <div key={item.id}>
@@ -134,7 +132,6 @@ export class PDP extends Component {
                                   <label htmlFor={`${attribute.name} ${index}`} className={`attribute-value ${attribute.name}`} style={{ backgroundColor: item.value }}></label>
                                 </div>
                               )
-                              break;
                             default:
                               return (
                                 <div key={item.id}>
