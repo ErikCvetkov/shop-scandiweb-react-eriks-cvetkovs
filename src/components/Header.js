@@ -55,7 +55,7 @@ export class Header extends Component {
                     </Link>
                     <div className='nav-right-part'>
                         <Currency activeElement={this.state.activeElement} getActiveElement={this.getActiveElement} id={"currancy"} chooseCurrency={this.props.chooseCurrency} currency={this.props.currency} />
-                        <Cart updateOrderCount={this.props.updateOrderCount} currency={this.props.currency} id={"cart"} activeElement={this.state.activeElement} getActiveElement={this.getActiveElement} orders={this.props.orders} />
+                        <Cart getCount={this.props.getCount} totalSum={this.props.totalSum} updateOrderCount={this.props.updateOrderCount} currency={this.props.currency} id={"cart"} activeElement={this.state.activeElement} getActiveElement={this.getActiveElement} orders={this.props.orders} />
                     </div>
                 </div>
                 {this.state.activeElement === "cart" &&

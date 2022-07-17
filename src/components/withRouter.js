@@ -2,16 +2,17 @@
 // https://reactrouter.com/docs/en/v6/getting-started/faq <- from official FAQ page
 
 import React from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
  
 const withRouter = WrappedComponent => props => {
   const params = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
  
   return (
     <WrappedComponent
       {...props}
-      params={{location,params}}
+      params={{location,params,navigate}}
     />
   );
 };

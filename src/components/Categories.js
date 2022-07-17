@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { gql } from '@apollo/client';
 import { Query } from '@apollo/client/react/components';
+import withRouter from './withRouter';
 
 
 const POSTS_CATEGORIES = gql`
@@ -27,6 +28,7 @@ export class Categories extends Component {
     navbarTabChange(event,tab){
         this.handleClick(event,tab)
         this.props.chooseCategory(tab)
+        this.props.params.navigate("/")
     }
 
     render() {
@@ -55,4 +57,4 @@ export class Categories extends Component {
 
 }
 
-export default Categories
+export default withRouter(Categories)

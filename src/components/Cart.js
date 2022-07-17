@@ -8,30 +8,6 @@ export class Cart extends Component {
         this.box = React.createRef();
     }
 
-    getCount = () => {
-        let orders = this.props.orders
-        let count = 0
-        if (orders !== null) {
-            orders.map((item) => {
-                count += item.count
-            })
-            return count
-        }
-    }
-
-    totalSum = () => {
-        const orders = this.props.orders
-        let totalSum = 0
-        orders.map((product)=>{
-            product.prices.map((price)=>{
-                if(price.currency.symbol === this.props.currency){
-                    totalSum = totalSum + price.amount * product.count
-                }
-            })
-        })
-        return totalSum.toFixed(2) + ' ' + this.props.currency
-    }
-
     render() {
         return (
             <div className='cart-icon' ref={this.box}>
@@ -43,7 +19,7 @@ export class Cart extends Component {
                     </svg>
                     {this.props.orders.length > 0 &&
                         <div className='cartItemsCount'>
-                            {this.getCount()}
+                            {this.props.getCount()}
                         </div>
                     }
                 </div>
@@ -58,14 +34,14 @@ export class Cart extends Component {
                                 <div className='cart-items'>
                                     <div className='row'>
                                         <span className='cart-heading'>My bag, &nbsp;</span>
-                                        {this.getCount() < 2 ?
+                                        {this.props.getCount() < 2 ?
                                             (
                                                 <span className='cart-heading-count'>
-                                                    {this.getCount()}  item
+                                                    {this.props.getCount()}  item
                                                 </span>
                                             ) : (
                                                 <span className='cart-heading-count'>
-                                                    {this.getCount()}  items
+                                                    {this.props.getCount()}  items
                                                 </span>
                                             )
                                         }
@@ -135,10 +111,10 @@ export class Cart extends Component {
                                     </div>
                                     <div className='cart-total-price'>
                                         <span>Total</span>
-                                        <span>{this.totalSum()}</span>
+                                        <span>{this.props.totalSum()}</span>
                                     </div>
                                     <div className='cart-end-buttons'>
-                                        <Link to="/" className='link-to-bag'>VIEW BAG</Link>
+                                        <Link to="/cart" onClick={()=>this.props.getActiveElement(null,null)} className='link-to-bag'>VIEW BAG</Link>
                                         <div className='check-out-btn'>CHECK OUT</div>
                                     </div>
                                 </div>

@@ -13,6 +13,8 @@
   width: 100%;
 }
 
+/* -------------------- HEADER COMPONENT --------------------*/
+
 header {
   position: fixed;
   width: 100%;
@@ -119,93 +121,7 @@ header .nav-right-part {
   align-items: center;
 }
 
-header .nav-right-part .cart-icon {
-  position: relative;
-}
-
-header .nav-right-part .cart-icon .cart-pointer {
-  cursor: pointer;
-}
-
-header .nav-right-part .cart-icon .cart {
-  position: absolute;
-  width: 325px;
-  right: 0;
-  background-color: #FFFFFF;
-  top: 51px;
-  z-index: 4;
-}
-
-.cart .cart-items-overflow {
-  max-height: 500px;
-  overflow-y: auto;
-}
-
-header .nav-right-part .cart-icon .cart .row {
-  display: flex;
-}
-
-header .nav-right-part .cart-icon .cart .cart-items {
-  padding: 32px 16px 32px 16px;
-  overflow: auto;
-}
-
-
-header .nav-right-part .cart-icon .cart .cart-heading {
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 160%;
-}
-
-header .nav-right-part .cart-icon .cart .cart-heading-count {
-  font-weight: 500;
-  line-height: 160%;
-
-}
-
-header .cart-icon .cartItemsCount {
-  position: absolute;
-  bottom: 12px;
-  left: 13px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #1D1F22;
-  color: #FFFFFF;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 16px;
-  width: 20px;
-  height: 20px;
-}
-
-.cart-item-info {
-  width: 136px;
-  max-height: 677px;
-  overflow: auto;
-}
-
-.cart-item {
-  padding-top: 30px;
-}
-
-.cart-item-info .name {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 160%;
-}
-
-.cart-item-info .price {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 160%;
-  padding: 4px 0 8px 0;
-}
+/* -------------------- ITEMS COMPONENT --------------------*/
 
 main {
   padding-top: 160px !important;
@@ -235,6 +151,8 @@ main.category .catalogue a {
   text-decoration: none;
   color: #1D1F22;
 }
+
+/* -------------------- ITEM COMPONENT --------------------*/
 
 .item {
   display: flex;
@@ -318,6 +236,8 @@ main.category .catalogue a {
 .item:hover .cart-button {
   display: flex;
 }
+
+/* -------------------- PDP COMPONENT --------------------*/
 
 .pdp {
   display: flex;
@@ -490,6 +410,111 @@ main.category .catalogue a {
   display: flex;
 }
 
+/* -------------------- CART COMPONENT --------------------*/
+
+header .nav-right-part .cart-icon {
+  position: relative;
+}
+
+header .nav-right-part .cart-icon .cart-pointer {
+  cursor: pointer;
+}
+
+header .nav-right-part .cart-icon .cart {
+  position: absolute;
+  width: 325px;
+  right: 0;
+  background-color: #FFFFFF;
+  top: 51px;
+  z-index: 4;
+}
+
+.cart {
+  max-height: 650px;
+}
+
+.cart .cart-items-overflow {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 30px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.cart .cart-items-overflow ::-webkit-scrollbar {
+  display: none;
+}
+
+header .nav-right-part .cart-icon .cart .row {
+  display: flex;
+}
+
+header .nav-right-part .cart-icon .cart .cart-items {
+  padding: 32px 16px 32px 16px;
+  overflow: auto;
+}
+
+
+header .nav-right-part .cart-icon .cart .cart-heading {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+}
+
+header .nav-right-part .cart-icon .cart .cart-heading-count {
+  font-weight: 500;
+  line-height: 160%;
+
+}
+
+header .cart-icon .cartItemsCount {
+  position: absolute;
+  bottom: 12px;
+  left: 13px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1D1F22;
+  color: #FFFFFF;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  width: 20px;
+  height: 20px;
+}
+
+.cart .cart-item-info {
+  width: 136px;
+  max-height: 677px;
+  overflow: auto;
+}
+
+.cart .cart-item {
+  padding-top: 30px;
+}
+
+.cart .cart-item:first-child {
+  padding-top: 0;
+}
+
+.cart .cart-item-info .name {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+}
+
+.cart .cart-item-info .price {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  padding: 4px 0 8px 0;
+}
+
 .cart .attribute {
   padding-bottom: 8px;
 }
@@ -616,4 +641,176 @@ main.category .catalogue a {
   height: 45px;
   background: #5ECE7B;
   color: #FFFFFF;
+}
+
+/* -------------------- CART OVERVIEW PAGE -------------------- */
+
+.cart-overview .heading {
+  padding-bottom: 55px;
+}
+
+.cart-overview .order {
+  width: 100%;
+  border-top: 1px solid #E5E5E5;
+  padding: 25px 0 25px 0;
+}
+
+.order-list .order:last-child {
+  border:1px solid black;
+  /* border-bottom: 1px solid #E5E5E5; */
+}
+
+.order .item-order {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.order .name {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+}
+
+.cart-overview .name-secondary {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 27px;
+  padding-top: 16px;
+}
+
+.order .price {
+  padding-top: 20px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.order .group {
+  display: flex;
+}
+
+.order .attribute {
+  padding-top: 16px;
+}
+
+.order .attribute-name {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.order .attribute-values {
+  padding-top: 8px;
+}
+
+.order .attribute-value {
+  border: 1px solid #1D1F22;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.order .attribute .attribute-value.Size {
+  width: 63px;
+  height: 45px;
+  margin-right: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order .attribute .attribute-value.Color {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+.order .attribute .attribute-value.Color:first-child {
+  margin-left: 2px;
+}
+
+.order .attribute .attribute-value.default {
+  padding: 10px;
+  margin-right: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order .attribute .attribute-value.active {
+  background-color: #1D1F22;
+  color: #FFFFFF;
+}
+
+.order .attribute .attribute-value.Color.active {
+  outline-offset: 1px;
+  outline: 1px solid #5ECE7B;
+}
+
+.order .item-count {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 190px;
+  padding: 0 10px 0 10px;
+  height: 100%;
+}
+
+.order .item-count .button-count {
+  width: 45px;
+  height: 45px;
+  border: 1px solid #1D1F22;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: 100;
+}
+
+.order .item-img {
+  height: 288px;
+  width: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.order-payment {
+  padding-top: 32px;
+}
+
+.order-payment div {
+  padding-top: 8px;
+}
+
+.order-payment .property {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  padding-right: 10px;
+}
+
+.order-payment .value {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.order-payment .payment-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 279px;
+  height: 43px;
+  background: #5ECE7B;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  margin: 16px 0 16px 0;
 }
