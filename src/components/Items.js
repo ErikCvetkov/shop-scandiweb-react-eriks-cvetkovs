@@ -36,6 +36,8 @@ query items {
   }
 `;
 
+
+//filter for categories
 const filter = (data, filter) => (filter === "all") ? (data.category.products) : (data.category.products.filter((item) => item.category === filter))
 
 

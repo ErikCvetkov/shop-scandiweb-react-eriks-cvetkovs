@@ -23,6 +23,7 @@ class App extends React.Component {
     this.getCount = this.getCount.bind(this)
   }
 
+  //get local storage data to state
   componentWillMount(){
     localStorage.getItem('orders') && this.setState({
       orders: JSON.parse(localStorage.getItem('orders')),
@@ -51,18 +52,22 @@ class App extends React.Component {
       </Router>
     )
   }
+
+  //change category in state
   chooseCategory(category) {
     this.setState({
       currentCategory: category
     })
   }
 
+  //change currency in state
   chooseCurrency(currency) {
     this.setState({
       currentCurrency: currency
     })
   }
 
+  //find if item is already in arrey of orders
   itemIsInArray(item, array) {
     let isInArray = false
     let itemIndex = null
@@ -74,23 +79,27 @@ class App extends React.Component {
             similarAttrs++
           }
         })
+        //if item and element has the same amount of simillar attributes that means that they are simillar
         if (similarAttrs === el.attributes.length) {
           isInArray = true
           itemIndex = index
         }
       }
     })
+    //return if is in array and index if it is
     return [isInArray, itemIndex]
   }
 
 
   addItemToOrder(item) {
     let isInArray = this.itemIsInArray(item, this.state.orders)
+    //if item is not in array add it 
     if (!isInArray[0]) {
       const order = JSON.parse(JSON.stringify(item))
       order.count = 1
       this.setState({ orders: [...this.state.orders, order] })
     } else {
+      //if item is already in array, change count property ++1 
       let orders = this.state.orders
       let order = orders[isInArray[1]]
       order.count = ++order.count
@@ -99,6 +108,7 @@ class App extends React.Component {
     }
   }
 
+  //update count of order when user clicks on button in cart or cartOverview
   updateOrderCount(index, move) {
     let orders = this.state.orders
     let order = orders[index]
@@ -116,6 +126,7 @@ class App extends React.Component {
     }
   }
 
+  //get total sum of all orders
   totalSum(){
     let orders = this.state.orders
     let totalSum = 0

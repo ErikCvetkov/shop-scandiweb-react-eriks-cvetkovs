@@ -19,6 +19,7 @@ export class PDP extends Component {
     this.setState({ currantImage: index })
   }
 
+  //check if user entered all values for attributes
   checkAttributes() {
     let isValid = true
     let errorFields = []
@@ -26,6 +27,7 @@ export class PDP extends Component {
       isValid = false
     } else {
       Object.keys(this.state.attributes).forEach((key) => {
+        //if any attribute is not filled, page will return error
         if (this.state.attributes[key] === null) {
           isValid = false
           errorFields.push(key)
@@ -36,6 +38,7 @@ export class PDP extends Component {
     return isValid
   }
 
+  //sumbit item to order
   handleSubmit = (event) => {
     event.preventDefault()
     if (this.checkAttributes()) {
@@ -49,6 +52,7 @@ export class PDP extends Component {
   }
 
   componentWillMount() {
+    //if page didnt get info about product via state it will show error 
     if (this.props.params.location.state === null) {
       this.setState({ errorState: true })
     } else {
@@ -66,7 +70,7 @@ export class PDP extends Component {
     }
   }
 
-
+  //when user selects attributes value its automatically inserts to state
   handleInputChange = (event) => {
     this.setState(prevState => ({
       attributes: {

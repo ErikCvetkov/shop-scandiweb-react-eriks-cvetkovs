@@ -14,6 +14,7 @@ export class Header extends Component {
         this.getActiveElement = this.getActiveElement.bind(this)
     }
 
+    //if user opens currency or cart box page gets event listener click wich tracks where user clicks next
     getActiveElement(element, box) {
         element === this.state.activeElement ? (
             this.setState({ activeElement: null, box: null }, () => {
@@ -26,6 +27,7 @@ export class Header extends Component {
         )
     }
 
+    //if user clicks outside currancy or cart box it closes
     handleClick = (event) => {
         const box = this.state.box
         if (box && !box.current.contains(event.target)) {

@@ -21,13 +21,14 @@ export class Categories extends Component {
     }
 
     handleClick(event, currentTab){
-        event.preventDefault();
         this.setState({ activeTab: currentTab });
     }
 
+   // change active category
     navbarTabChange(event,tab){
         this.handleClick(event,tab)
         this.props.chooseCategory(tab)
+         //whenever user clicks on categories, app return items componen
         this.props.params.navigate("/")
     }
 

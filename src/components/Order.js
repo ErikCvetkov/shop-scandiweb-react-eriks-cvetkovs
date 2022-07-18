@@ -100,6 +100,8 @@ export class Order extends Component {
             </div>
         )
     }
+
+    //image switcher
     switchImage(move){
         let imageCount = this.props.el.gallery.length
         if (move === 'left' && this.state.currantImage !== 0){
