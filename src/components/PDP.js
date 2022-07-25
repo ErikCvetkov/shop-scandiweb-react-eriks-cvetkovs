@@ -106,13 +106,11 @@ export class PDP extends Component {
             <div className='item-info'>
               <div className='info-heading'>
                 <div className='heading-main'>
-                  {item.name.split(" ")[0]}
+                  {item.brand}
                 </div>
-                {item.name.split(" ").length > 1 &&
-                  <div className='heading-seconadry'>
-                    {item.name.substr(item.name.indexOf(" ") + 1)}
-                  </div>
-                }
+                <div className='heading-seconadry'>
+                  {item.name}
+                </div>
               </div>
               {
                 item.attributes.map((attribute) => {
@@ -171,11 +169,11 @@ export class PDP extends Component {
               <div className='item-description' dangerouslySetInnerHTML={{ __html: item.description }}></div>
             </div>
           </form>
-          ) : (
-            <div>
-              Error during stage reading, please go to main page.
-            </div>
-          )
+        ) : (
+          <div>
+            Error during stage reading, please go to main page.
+          </div>
+        )
         }
       </main>
     )

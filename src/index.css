@@ -139,12 +139,12 @@ main .heading {
 }
 
 main.category .catalogue {
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: inline-grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, max(386px, 100%/3)), 1fr));
+  justify-items: center;
+  align-items: center;
   width: 100%;
-  overflow: hidden;
-  justify-content: space-around;
-  padding-bottom: 191px;
 }
 
 main.category .catalogue a {

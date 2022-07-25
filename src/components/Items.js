@@ -12,6 +12,7 @@ query items {
         name
         gallery
         category
+        brand
         prices{
           currency{
             symbol
@@ -48,7 +49,7 @@ export class Items extends Component {
                 <div className='row heading'>
                     {this.props.category.toUpperCase()}
                 </div>
-                <div className='row catalogue'>
+                <div className='catalogue'>
                     <Query query={POSTS_ITEMS}>
                         {({ loading, error, data }) => {
                             if (loading) return <p>Loading...</p>;

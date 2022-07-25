@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Items from "./components/Items";
 import PDP from "./components/PDP";
 import CartOverview from "./components/CartOverview"
+import { useQuery, gql } from '@apollo/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -24,7 +25,7 @@ class App extends React.Component {
   }
 
   //get local storage data to state
-  componentWillMount(){
+  componentWillMount() {
     localStorage.getItem('orders') && this.setState({
       orders: JSON.parse(localStorage.getItem('orders')),
     })
@@ -33,7 +34,7 @@ class App extends React.Component {
     })
   }
 
-  componentWillUpdate(nextProps,nextState){
+  componentWillUpdate(nextProps, nextState) {
     localStorage.setItem('orders', JSON.stringify(nextState.orders))
     localStorage.setItem('currentCurrency', JSON.stringify(nextState.currentCurrency))
   }
@@ -92,6 +93,45 @@ class App extends React.Component {
 
 
   addItemToOrder(item) {
+
+
+    const POSTS_ITEMS = gql`
+      query items {
+          category{
+            name
+            products{
+              id
+              name
+              gallery
+              category
+              brand
+              prices{
+                currency{
+                  symbol
+                }
+                amount
+              }
+              attributes{
+                  id
+                  name
+                  type
+                  items{
+                    displayValue
+                    id
+                    value
+                  }
+              }
+              inStock
+              brand
+              description
+            }
+          }
+        }
+      `;
+
+
+
+
     let isInArray = this.itemIsInArray(item, this.state.orders)
     //if item is not in array add it 
     if (!isInArray[0]) {
@@ -127,7 +167,7 @@ class App extends React.Component {
   }
 
   //get total sum of all orders
-  totalSum(){
+  totalSum() {
     let orders = this.state.orders
     let totalSum = 0
     orders.forEach((product) => {
@@ -140,16 +180,16 @@ class App extends React.Component {
     return totalSum.toFixed(2) + ' ' + this.state.currentCurrency
   }
 
-  getCount(){
+  getCount() {
     let orders = this.state.orders
     let count = 0
     if (orders !== null) {
-        orders.forEach((item) => {
-            count += item.count
-        })
-        return count
+      orders.forEach((item) => {
+        count += item.count
+      })
+      return count
     }
-}
+  }
 }
 
 
