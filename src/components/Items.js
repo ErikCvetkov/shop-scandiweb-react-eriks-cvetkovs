@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Item from './Item'
 import { gql } from '@apollo/client';
 import { Query } from '@apollo/client/react/components';
+import withRouter from './withRouter';
 
 const POSTS_ITEMS = gql`
 query items {
@@ -44,6 +45,7 @@ const filter = (data, filter) => (filter === "all") ? (data.category.products) :
 
 export class Items extends Component {
     render() {
+      console.log(this.props.params.params)
         return (
             <main className='category'>
                 <div className='row heading'>
@@ -66,4 +68,4 @@ export class Items extends Component {
     }
 }
 
-export default Items
+export default withRouter(Items)

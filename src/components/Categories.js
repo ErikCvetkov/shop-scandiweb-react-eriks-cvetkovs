@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { gql } from '@apollo/client';
 import { Query } from '@apollo/client/react/components';
 import withRouter from './withRouter';
-
+import { Link } from 'react-router-dom';
 
 const POSTS_CATEGORIES = gql`
 query categoties {
@@ -43,8 +43,11 @@ export class Categories extends Component {
                             {
                                 data.categories.map((category) => {
                                     return (
-                                        <li key={category.name} className={`${category.name === this.state.activeTab ? 'active' : ''}`} onClick={ event => this.navbarTabChange(event,category.name)}>
-                                            {category.name.toUpperCase()}
+                                        // <li key={category.name} className={`${category.name === this.state.activeTab ? 'active' : ''}`} onClick={ event => this.navbarTabChange(event,category.name)}>
+                                        <li key={category.name} className={`${category.name === this.state.activeTab ? 'active' : ''}`}>
+                                            <Link to={`/${category.name}`} state={{ currentCategory: category.name }}>
+                                                {category.name.toUpperCase()}
+                                            </Link>
                                         </li>
                                     );
                                 })

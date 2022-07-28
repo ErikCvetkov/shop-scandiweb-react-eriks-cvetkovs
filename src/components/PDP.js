@@ -97,8 +97,10 @@ export class PDP extends Component {
                 })
               }
             </div>
-            <div className='item-card'>
-              <img src={item.gallery[this.state.currantImage]} className={`img-fluid ${item.inStock ? '' : 'unavailable'}`} alt={item.gallery[this.state.currantImage]} />
+            <div className='item-card' style={{
+              backgroundImage: `url(${item.gallery[this.state.currantImage]})`
+            }}>
+              {/* <img src={item.gallery[this.state.currantImage]} className={`img-fluid ${item.inStock ? '' : 'unavailable'}`} alt={item.gallery[this.state.currantImage]} /> */}
               {!this.state.inStock &&
                 <div className='unavailable-label'>OUT OF STOCK</div>
               }
