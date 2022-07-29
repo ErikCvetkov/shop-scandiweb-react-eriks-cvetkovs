@@ -16,20 +16,12 @@ export class Categories extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            activeTab: 'all'
+            activeTab: "all"
         }
     }
 
-    handleClick(event, currentTab){
-        this.setState({ activeTab: currentTab });
-    }
-
-   // change active category
-    navbarTabChange(event,tab){
-        this.handleClick(event,tab)
-        this.props.chooseCategory(tab)
-         //whenever user clicks on categories, app return items componen
-        this.props.params.navigate("/")
+    changeCategory(name){
+        this.setState({ activeTab: name })
     }
 
     render() {
@@ -43,9 +35,8 @@ export class Categories extends Component {
                             {
                                 data.categories.map((category) => {
                                     return (
-                                        // <li key={category.name} className={`${category.name === this.state.activeTab ? 'active' : ''}`} onClick={ event => this.navbarTabChange(event,category.name)}>
-                                        <li key={category.name} className={`${category.name === this.state.activeTab ? 'active' : ''}`}>
-                                            <Link to={`/${category.name}`} state={{ currentCategory: category.name }}>
+                                        <li key={category.name} className={`${category.name === this.state.activeTab ? 'active' : ''}`} >
+                                            <Link to={`/${category.name}`} state={{ currentCategory: category.name }} onClick={()=>this.changeCategory(category.name)}>
                                                 {category.name.toUpperCase()}
                                             </Link>
                                         </li>

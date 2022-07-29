@@ -5,7 +5,7 @@ import Items from "./components/Items";
 import PDP from "./components/PDP";
 import CartOverview from "./components/CartOverview"
 import { gql } from '@apollo/client';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -45,6 +45,7 @@ class App extends React.Component {
           <Header getCount={this.getCount} totalSum={this.totalSum} updateOrderCount={this.updateOrderCount} chooseCategory={this.chooseCategory} orders={this.state.orders} chooseCurrency={this.chooseCurrency} currency={this.state.currentCurrency} />
         </div>
         <Routes>
+          <Route path="*" element={<Navigate to="/all" replace />}/>
           <Route path="/:category" element={<Items addItemToOrder={this.addItemToOrder} category={this.state.currentCategory} currency={this.state.currentCurrency} />} />
           <Route path="/item/:id" element={<PDP addItemToOrder={this.addItemToOrder} currency={this.state.currentCurrency} />} />
           <Route path="/cart" element={<CartOverview getCount={this.getCount} totalSum={this.totalSum} updateOrderCount={this.updateOrderCount} orders={this.state.orders} currency={this.state.currentCurrency} />} />
@@ -92,45 +93,6 @@ class App extends React.Component {
 
 
   addItemToOrder(item) {
-
-
-    const POSTS_ITEMS = gql`
-      query items {
-          category{
-            name
-            products{
-              id
-              name
-              gallery
-              category
-              brand
-              prices{
-                currency{
-                  symbol
-                }
-                amount
-              }
-              attributes{
-                  id
-                  name
-                  type
-                  items{
-                    displayValue
-                    id
-                    value
-                  }
-              }
-              inStock
-              brand
-              description
-            }
-          }
-        }
-      `;
-
-
-
-
     let isInArray = this.itemIsInArray(item, this.state.orders)
     //if item is not in array add it 
     if (!isInArray[0]) {

@@ -1,6 +1,36 @@
 import React, { Component } from 'react'
 import withRouter from './withRouter';
 import Price from './Price';
+import gql from 'graphql-tag';
+import { Query } from '@apollo/client/react/components';
+
+const POST_ITEM_PDP = gql`
+query item($productId:String!){
+	product (id: $productId){
+    id
+    name
+    inStock
+    gallery
+    description
+    attributes{
+      name
+      type
+      items{
+        id
+        displayValue
+        value
+      }
+    }
+    prices{
+      currency{
+        symbol
+      }
+      amount
+    }
+    brand
+  }
+}
+`;
 
 export class PDP extends Component {
   constructor(props) {
@@ -51,24 +81,24 @@ export class PDP extends Component {
     }
   }
 
-  componentWillMount() {
-    //if page didnt get info about product via state it will show error 
-    if (this.props.params.location.state === null) {
-      this.setState({ errorState: true })
-    } else {
-      const item = this.props.params.location.state.item
-      this.setState({ item: item, inStock: item.inStock }, () => {
-        this.state.item.attributes.forEach((attribute) => {
-          this.setState(prevState => ({
-            attributes: {
-              ...prevState.attributes,
-              [attribute.name]: null
-            }
-          }))
-        })
-      })
-    }
-  }
+  // componentWillMount() {
+  //   //if page didnt get info about product via state it will show error 
+  //   if (this.props.params.location.state === null) {
+  //     this.setState({ errorState: true })
+  //   } else {
+  //     const item = this.props.params.location.state.item
+  //     this.setState({ item: item, inStock: item.inStock }, () => {
+  //       this.state.item.attributes.forEach((attribute) => {
+  //         this.setState(prevState => ({
+  //           attributes: {
+  //             ...prevState.attributes,
+  //             [attribute.name]: null
+  //           }
+  //         }))
+  //       })
+  //     })
+  //   }
+  // }
 
   //when user selects attributes value its automatically inserts to state
   handleInputChange = (event) => {
@@ -81,103 +111,112 @@ export class PDP extends Component {
   }
 
   render() {
-    const item = this.state.item
+    const productId = this.props.params.params.id;
     return (
-      <main className='pdp'>
-        {!this.state.errorState ? (
-          <form onSubmit={this.handleSubmit} className="row">
-            <div className='pictures'>
-              {
-                item.gallery.map((picture, index) => {
-                  return (
-                    <div className='item-picture-dpd' key={index} onClick={() => this.updateImage(index)}>
-                      <img src={picture} className="img-fluid" alt={picture} />
+      <Query query={POST_ITEM_PDP} variables={{ productId }}>
+        {({ loading, error, data }) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error :(</p>;
+          const item = data.product
+          console.log(item)
+          return (
+            <main className='pdp' key={item.id}>
+              {!this.state.errorState ? (
+                <form onSubmit={this.handleSubmit} className="row">
+                  <div className='pictures'>
+                    {
+                      item.gallery.map((picture, index) => {
+                        return (
+                          <div className='item-picture-dpd' key={index} onClick={() => this.updateImage(index)}>
+                            <img src={picture} className="img-fluid" alt={picture} />
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                  <div className={`item-card ${item.inStock ? '' : 'unavailable'}`} style={{
+                    backgroundImage: `url(${item.gallery[this.state.currantImage]})`
+                  }}>
+                    {!item.inStock &&
+                      <div className='unavailable-label'>OUT OF STOCK</div>
+                    }
+                  </div>
+                  <div className='item-info'>
+                    <div className='info-heading'>
+                      <div className='heading-main'>
+                        {item.brand}
+                      </div>
+                      <div className='heading-seconadry'>
+                        {item.name}
+                      </div>
                     </div>
-                  )
-                })
-              }
-            </div>
-            <div className='item-card' style={{
-              backgroundImage: `url(${item.gallery[this.state.currantImage]})`
-            }}>
-              {/* <img src={item.gallery[this.state.currantImage]} className={`img-fluid ${item.inStock ? '' : 'unavailable'}`} alt={item.gallery[this.state.currantImage]} /> */}
-              {!this.state.inStock &&
-                <div className='unavailable-label'>OUT OF STOCK</div>
-              }
-            </div>
-            <div className='item-info'>
-              <div className='info-heading'>
-                <div className='heading-main'>
-                  {item.brand}
-                </div>
-                <div className='heading-seconadry'>
-                  {item.name}
-                </div>
-              </div>
-              {
-                item.attributes.map((attribute) => {
-                  return (
-                    <div className='attribute' key={attribute.id}>
+                    {
+                      item.attributes.map((attribute) => {
+                        return (
+                          <div className='attribute' key={attribute.id}>
+                            <div className='attribute-name'>
+                              {attribute.name}
+                              {this.state.errorFields.includes(attribute.name) ? (
+                                <span className='error'> (Select value) </span>
+                              ) : null} :
+                            </div>
+                            <div className='attribute-values'>
+                              {
+                                attribute.items.map((item, index) => {
+                                  switch (attribute.name) {
+                                    case "Size":
+                                      return (
+                                        <div key={item.id}>
+                                          <input name={attribute.name} type="radio" id={`${attribute.name} ${index}`} value={item.value} className='input-size input-hidden' onChange={this.handleInputChange} />
+                                          <label htmlFor={`${attribute.name} ${index}`} className={`attribute-value ${attribute.name}`}>{item.value}</label>
+                                        </div>
+                                      )
+                                    case "Color":
+                                      return (
+                                        <div key={item.id}>
+                                          <input name={attribute.name} type="radio" id={`${attribute.name} ${index}`} value={item.value} className='input-color input-hidden' onChange={this.handleInputChange} />
+                                          <label htmlFor={`${attribute.name} ${index}`} className={`attribute-value ${attribute.name}`} style={{ backgroundColor: item.value }}></label>
+                                        </div>
+                                      )
+                                    default:
+                                      return (
+                                        <div key={item.id}>
+                                          <input name={attribute.name} type="radio" id={`${attribute.name} ${index}`} value={item.value} className='input-size input-hidden' onChange={this.handleInputChange} />
+                                          <label htmlFor={`${attribute.name} ${index}`} className='attribute-value default'>{item.displayValue}</label>
+                                        </div>
+                                      )
+                                  }
+                                })
+                              }
+                            </div>
+                          </div>
+                        )
+                      })
+                    }
+                    <div className='price-info'>
                       <div className='attribute-name'>
-                        {attribute.name}
-                        {this.state.errorFields.includes(attribute.name) ? (
-                          <span className='error'> (Select value) </span>
-                        ) : null} :
+                        Price:
                       </div>
-                      <div className='attribute-values'>
-                        {
-                          attribute.items.map((item, index) => {
-                            switch (attribute.name) {
-                              case "Size":
-                                return (
-                                  <div key={item.id}>
-                                    <input name={attribute.name} type="radio" id={`${attribute.name} ${index}`} value={item.value} className='input-size input-hidden' onChange={this.handleInputChange} />
-                                    <label htmlFor={`${attribute.name} ${index}`} className={`attribute-value ${attribute.name}`}>{item.displayValue}</label>
-                                  </div>
-                                )
-                              case "Color":
-                                return (
-                                  <div key={item.id}>
-                                    <input name={attribute.name} type="radio" id={`${attribute.name} ${index}`} value={item.value} className='input-color input-hidden' onChange={this.handleInputChange} />
-                                    <label htmlFor={`${attribute.name} ${index}`} className={`attribute-value ${attribute.name}`} style={{ backgroundColor: item.value }}></label>
-                                  </div>
-                                )
-                              default:
-                                return (
-                                  <div key={item.id}>
-                                    <input name={attribute.name} type="radio" id={`${attribute.name} ${index}`} value={item.value} className='input-size input-hidden' onChange={this.handleInputChange} />
-                                    <label htmlFor={`${attribute.name} ${index}`} className='attribute-value default'>{item.displayValue}</label>
-                                  </div>
-                                )
-                            }
-                          })
-                        }
+                      <div className='price-amount'>
+                        <Price currency={this.props.currency} item={item} />
                       </div>
                     </div>
-                  )
-                })
+                    <button className='add-to-cart-button' disabled={!item.inStock}>
+                      ADD TO CART
+                    </button>
+                    <div className='item-description' dangerouslySetInnerHTML={{ __html: item.description }}></div>
+                  </div>
+                </form>
+              ) : (
+                <div>
+                  Error during stage reading, please go to main page.
+                </div>
+              )
               }
-              <div className='price-info'>
-                <div className='attribute-name'>
-                  Price:
-                </div>
-                <div className='price-amount'>
-                  <Price currency={this.props.currency} item={item} />
-                </div>
-              </div>
-              <button className='add-to-cart-button' disabled={!this.state.inStock}>
-                ADD TO CART
-              </button>
-              <div className='item-description' dangerouslySetInnerHTML={{ __html: item.description }}></div>
-            </div>
-          </form>
-        ) : (
-          <div>
-            Error during stage reading, please go to main page.
-          </div>
-        )
-        }
-      </main>
+            </main>
+          )
+        }}
+      </Query>
     )
   }
 }
