@@ -16,6 +16,7 @@ export class Categories extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            // activeTab: this.props.params.location.state.currentCategory
             activeTab: "all"
         }
     }
@@ -25,6 +26,8 @@ export class Categories extends Component {
     }
 
     render() {
+        console.log(this.props.params.location)
+        // this.props.params.location.state === null ? this.setState({activeTab:"all"}) : this.setState({activeTab: this.props.params.location.state.currentCategory})
         return (
             <Query query={POSTS_CATEGORIES}>
                 {({ loading, error, data }) => {

@@ -4,7 +4,6 @@ import Header from "./components/Header";
 import Items from "./components/Items";
 import PDP from "./components/PDP";
 import CartOverview from "./components/CartOverview"
-import { gql } from '@apollo/client';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 class App extends React.Component {
@@ -12,7 +11,6 @@ class App extends React.Component {
     super(props)
     this.state = {
       orders: [],
-      currentCategory: "all",
       currentCurrency: "$",
     }
     this.chooseCategory = this.chooseCategory.bind(this)

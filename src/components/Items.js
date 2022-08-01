@@ -72,9 +72,9 @@ export class Items extends Component {
     const category = {"title": this.props.params.params.category}
     return (
       <main className='category'>
-        <div className='row heading'>
+        {/* <div className='row heading'>
           {this.props.category.toUpperCase()}
-        </div>
+        </div> */}
         <div className='catalogue'>
           <Query query={POST_ITEM_CATEGORY} variables={{ category }}>
             {({ loading, error, data }) => {
