@@ -516,7 +516,7 @@ header .cart-icon .cartItemsCount {
   padding-top: 0;
 }
 
-.cart .item-info .name {
+.cart .item-info .name, .name-secondary {
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 300;

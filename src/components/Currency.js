@@ -1,16 +1,6 @@
 import React, { Component } from 'react'
-import { gql } from '@apollo/client';
 import { Query } from '@apollo/client/react/components';
-
-
-const POSTS_CURRENCIES = gql`
-query currencies {
-    currencies {
-      label
-      symbol
-    }
-  }
-`;
+import {POSTS_CURRENCIES} from '../queries/currencies-query.js'
 
 export class Currency extends Component {
     constructor(props) {

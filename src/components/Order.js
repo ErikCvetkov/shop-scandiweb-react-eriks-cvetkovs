@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Price from './Price'
 
 export class Order extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             currantImage: 0
@@ -15,23 +15,12 @@ export class Order extends Component {
         return (
             <div key={`${this.props.id} ${el.id} ${index}`} className="item-order">
                 <div className='item-info'>
-                    {this.props.id === 'cart' ? (
-                        <div className='name'>
-                            {el.name}
-                        </div>
-                    ) : (
-                        <div>
-                            <div className='name'>
-                                {el.name.split(" ")[0]}
-                            </div>
-                            {el.name.split(" ").length > 1 &&
-                                <div className='name-secondary'>
-                                    {el.name.substr(el.name.indexOf(" ") + 1)}
-                                </div>
-                            }
-                        </div>
-                    )
-                    }
+                    <div className='name'>
+                        {el.brand}
+                    </div>
+                    <div className='name-secondary'>
+                        {el.name}
+                    </div>
                     <div className='price'>
                         <Price currency={this.props.currency} item={el} />
                     </div>
@@ -48,13 +37,13 @@ export class Order extends Component {
                                                 switch (product.name) {
                                                     case "Size":
                                                         return (
-                                                            <div key={`cart ${item.id}`} className={`attribute-value ${product.name} ${item.displayValue === product.userValue ? 'active' : null}`}>
-                                                                {item.displayValue}
+                                                            <div key={`cart ${item.id}`} className={`attribute-value ${product.name} ${item.value === product.userValue ? 'active' : ''}`}>
+                                                                {item.value}
                                                             </div>
                                                         )
                                                     case "Color":
                                                         return (
-                                                            <div key={`cart ${item.id}`} className={`attribute-value ${product.name} ${item.value === product.userValue ? 'active' : null}`} style={{ backgroundColor: item.value }}>
+                                                            <div key={`cart ${item.id}`} className={`attribute-value ${product.name} ${item.value === product.userValue ? 'active' : ''}`} style={{ backgroundColor: item.value }}>
                                                             </div>
                                                         )
                                                     default:
@@ -83,12 +72,12 @@ export class Order extends Component {
                     }}>
                         {this.props.id === 'cartOverview' && this.props.el.gallery.length > 1 &&
                             <div className='switcher'>
-                                <button className='switcher-button' onClick={()=>this.switchImage('left')}>
+                                <button className='switcher-button' onClick={() => this.switchImage('left')}>
                                     <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.25 1.06857L1.625 6.6876L7.25 12.3066" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                 </button>
-                                <button className='switcher-button' onClick={()=>this.switchImage('right')}>
+                                <button className='switcher-button' onClick={() => this.switchImage('right')}>
                                     <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.75 1.06808L6.375 6.68711L0.75 12.3062" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
@@ -102,16 +91,16 @@ export class Order extends Component {
     }
 
     //image switcher
-    switchImage(move){
+    switchImage(move) {
         let imageCount = this.props.el.gallery.length
-        if (move === 'left' && this.state.currantImage !== 0){
-            this.setState({currantImage: this.state.currantImage - 1})
-        } else if (move === 'left' && this.state.currantImage === 0){
-            this.setState({currantImage: imageCount-1})
-        } else if (move === 'right' && this.state.currantImage !== imageCount-1){
-            this.setState({currantImage: this.state.currantImage + 1})
-        } else if (move === 'right' && this.state.currantImage === imageCount-1) {
-            this.setState({currantImage: 0})
+        if (move === 'left' && this.state.currantImage !== 0) {
+            this.setState({ currantImage: this.state.currantImage - 1 })
+        } else if (move === 'left' && this.state.currantImage === 0) {
+            this.setState({ currantImage: imageCount - 1 })
+        } else if (move === 'right' && this.state.currantImage !== imageCount - 1) {
+            this.setState({ currantImage: this.state.currantImage + 1 })
+        } else if (move === 'right' && this.state.currantImage === imageCount - 1) {
+            this.setState({ currantImage: 0 })
         }
     }
 }

@@ -43,8 +43,8 @@ class App extends React.Component {
           <Header getCount={this.getCount} totalSum={this.totalSum} updateOrderCount={this.updateOrderCount} chooseCategory={this.chooseCategory} orders={this.state.orders} chooseCurrency={this.chooseCurrency} currency={this.state.currentCurrency} />
         </div>
         <Routes>
-          <Route path="*" element={<Navigate to="/all" replace />}/>
-          <Route path="/:category" element={<Items addItemToOrder={this.addItemToOrder} category={this.state.currentCategory} currency={this.state.currentCurrency} />} />
+          <Route path="*" element={<Navigate to="/all" replace />} />
+          <Route path="/:category" element={<Items addItemToOrder={this.addItemToOrder} category={this.state.currentCategory} currency={this.state.currentCurrency} client={this.props.client}/>} />
           <Route path="/item/:id" element={<PDP addItemToOrder={this.addItemToOrder} currency={this.state.currentCurrency} />} />
           <Route path="/cart" element={<CartOverview getCount={this.getCount} totalSum={this.totalSum} updateOrderCount={this.updateOrderCount} orders={this.state.orders} currency={this.state.currentCurrency} />} />
         </Routes>

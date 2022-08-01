@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import Item from './Item'
 import { Query } from '@apollo/client/react/components';
 import withRouter from './withRouter';
-import {POST_ITEM_CATEGORY} from '../queries/item-query.js'
+import { POST_ITEM_CATEGORY } from '../queries/item-query.js'
 
 export class Items extends Component {
   render() {
-    const category = {"title": this.props.params.params.category}
+    const category = { "title": this.props.params.params.category }
     return (
       <main className='category'>
         <div className='row heading'>
@@ -19,7 +19,7 @@ export class Items extends Component {
               if (error) return <p>Error :(</p>;
               const items = data.category.products
               return items.map(el => (
-                <Item key={el.id} item={el} addItemToOrder={this.props.addItemToOrder} currency={this.props.currency} />
+                <Item key={el.id} item={el} addItemToOrder={this.props.addItemToOrder} currency={this.props.currency} client={this.props.client}/>
               ));
             }}
           </Query>
