@@ -7,11 +7,11 @@ export class Price extends Component {
             <div>
                 {
                     item.prices.map((price) => {
-                        if (price.currency.symbol === this.props.currency){ return (
+                        return price.currency.symbol === this.props.currency ? (
                             <span className='price' key={item.id}>
                                 {price.currency.symbol} {price.amount}
                             </span>
-                        )}
+                        ) : null
                     })
                 }
             </div>

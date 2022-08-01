@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   //get local storage data to state
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     localStorage.getItem('orders') && this.setState({
       orders: JSON.parse(localStorage.getItem('orders')),
     })
@@ -31,7 +31,7 @@ class App extends React.Component {
     })
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  UNSAFE_componentWillUpdate(nextProps, nextState) {
     localStorage.setItem('orders', JSON.stringify(nextState.orders))
     localStorage.setItem('currentCurrency', JSON.stringify(nextState.currentCurrency))
   }
