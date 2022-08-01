@@ -61,10 +61,6 @@ const POST_ITEM_CATEGORY = gql`
 `;
 
 
-//filter for categories
-const filter = (data, filter) => (filter === "all") ? (data.category.products) : (data.category.products.filter((item) => item.category === filter))
-
-
 export class Items extends Component {
   render() {
     // const name = this.props.params.params.category

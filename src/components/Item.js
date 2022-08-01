@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 export class Item extends Component {
     render() {
         const item = this.props.item
-        console.log(item)
         return (
             // <div className='item' key={item.id}>
             //     <div className='item-img'>
@@ -32,7 +31,7 @@ export class Item extends Component {
             // </div>
             <div className='item' key={item.id}>
                 <div className='item-img'>
-                    <Link to={`/item/${item.id}`} state={{ item: item }}>
+                    <Link to={`/item/${item.id}`}>
                         <img src={item.gallery[0]} className={`img-fluid ${item.inStock ? '' : 'unavailable'}`} alt={item.id} />
                     </Link>
                     {!item.inStock &&
@@ -47,7 +46,7 @@ export class Item extends Component {
                     </div>
                 </div>
                 <div className='item-content'>
-                    <Link to={`/item/${item.id}`} state={{ item: item }}>
+                    <Link to={`/item/${item.id}`}>
                         <h2>{item.brand} {item.name}</h2>
                     </Link>
                     <Price currency={this.props.currency} item={item} />

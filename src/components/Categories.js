@@ -21,13 +21,24 @@ export class Categories extends Component {
         }
     }
 
-    changeCategory(name){
+
+    static getDerivedStateFromProps(state) {
+        if (state.params.location.state === null) {
+            return{
+                activeTab:"all"
+            }
+        } else {
+            return{
+                activeTab: state.params.location.state.currentCategory
+            }
+        }
+    }
+
+    changeCategory(name) {
         this.setState({ activeTab: name })
     }
 
     render() {
-        console.log(this.props.params.location)
-        // this.props.params.location.state === null ? this.setState({activeTab:"all"}) : this.setState({activeTab: this.props.params.location.state.currentCategory})
         return (
             <Query query={POSTS_CATEGORIES}>
                 {({ loading, error, data }) => {
@@ -39,7 +50,7 @@ export class Categories extends Component {
                                 data.categories.map((category) => {
                                     return (
                                         <li key={category.name} className={`${category.name === this.state.activeTab ? 'active' : ''}`} >
-                                            <Link to={`/${category.name}`} state={{ currentCategory: category.name }} onClick={()=>this.changeCategory(category.name)}>
+                                            <Link to={`/${category.name}`} state={{ currentCategory: category.name }} onClick={() => this.changeCategory(category.name)}>
                                                 {category.name.toUpperCase()}
                                             </Link>
                                         </li>
