@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Price from './Price.js';
 import { Link } from 'react-router-dom';
 import { POST_ITEM_PDP } from '../queries/item-pdp-query.js'
+import withRouter from './withRouter.js';
 
 export class Item extends Component {
 
@@ -32,7 +33,7 @@ export class Item extends Component {
         return (
             <div className='item' key={item.id}>
                 <div className='item-img'>
-                    <Link to={`/item/${item.id}`}>
+                    <Link to={`/item/${item.id}`} state={ this.props.params.location.state === null ? {currentCategory: 'all'} : { currentCategory:  this.props.params.location.state.currentCategory }}>
                         <img src={item.gallery[0]} className={`img-fluid ${item.inStock ? '' : 'unavailable'}`} alt={item.id} />
                     </Link>
                     {!item.inStock &&
@@ -49,7 +50,7 @@ export class Item extends Component {
                     </div>
                 </div>
                 <div className='item-content'>
-                    <Link to={`/item/${item.id}`}>
+                    <Link to={`/item/${item.id}`} state={ this.props.params.location.state === null ? {currentCategory: 'all'} : { currentCategory:  this.props.params.location.state.currentCategory }}>
                         <h2>{item.brand} {item.name}</h2>
                     </Link>
                     <Price currency={this.props.currency} item={item} />
@@ -59,5 +60,5 @@ export class Item extends Component {
     }
 }
 
-export default Item
+export default withRouter(Item)
 
