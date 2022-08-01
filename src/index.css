@@ -132,7 +132,7 @@ header .nav-right-part {
 
 main {
   padding-top: 160px !important;
-  padding: 0 101px 0 101px;
+  padding: 0 101px 160px 101px;
 }
 
 main .row {
