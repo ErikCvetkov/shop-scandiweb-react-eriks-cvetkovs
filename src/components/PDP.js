@@ -3,6 +3,7 @@ import withRouter from './withRouter';
 import Price from './Price';
 import gql from 'graphql-tag';
 import { Query } from '@apollo/client/react/components';
+import { Interweave } from 'interweave';
 
 const POST_ITEM_PDP = gql`
 query item($productId:String!){
@@ -72,6 +73,7 @@ export class PDP extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     if (this.checkAttributes()) {
+      console.log('imheer')
       const orderItem = JSON.parse(JSON.stringify(this.state.item))
       orderItem.attributes.forEach((attribute) => {
         const selectedValue = this.state.attributes[attribute.name]
@@ -80,25 +82,6 @@ export class PDP extends Component {
       this.props.addItemToOrder(orderItem)
     }
   }
-
-  // componentWillMount() {
-  //   //if page didnt get info about product via state it will show error 
-  //   if (this.props.params.location.state === null) {
-  //     this.setState({ errorState: true })
-  //   } else {
-  //     const item = this.props.params.location.state.item
-  //     this.setState({ item: item, inStock: item.inStock }, () => {
-  //       this.state.item.attributes.forEach((attribute) => {
-  //         this.setState(prevState => ({
-  //           attributes: {
-  //             ...prevState.attributes,
-  //             [attribute.name]: null
-  //           }
-  //         }))
-  //       })
-  //     })
-  //   }
-  // }
 
   //when user selects attributes value its automatically inserts to state
   handleInputChange = (event) => {
@@ -204,7 +187,9 @@ export class PDP extends Component {
                     <button className='add-to-cart-button' disabled={!item.inStock}>
                       ADD TO CART
                     </button>
-                    <div className='item-description' dangerouslySetInnerHTML={{ __html: item.description }}></div>
+                    <div className='item-description'>
+                      <Interweave content={item.description} />
+                    </div>
                   </div>
                 </form>
               ) : (
