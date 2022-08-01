@@ -1,36 +1,8 @@
 import React, { Component } from 'react'
 import withRouter from './withRouter';
-import gql from 'graphql-tag';
 import { Query } from '@apollo/client/react/components';
 import Form from './Form';
-
-const POST_ITEM_PDP = gql`
-query item($productId:String!){
-	product (id: $productId){
-    id
-    name
-    inStock
-    gallery
-    description
-    attributes{
-      name
-      type
-      items{
-        id
-        displayValue
-        value
-      }
-    }
-    prices{
-      currency{
-        symbol
-      }
-      amount
-    }
-    brand
-  }
-}
-`;
+import {POST_ITEM_PDP} from '../queries/item-pdp-query.js'
 
 export class PDP extends Component {
   render() {
