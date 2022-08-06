@@ -1,7 +1,6 @@
 {
   "name": "shop-scandiweb",
   "version": "0.1.0",
-  "homepage": "https://erikcvetkov.github.io/shop-scandiweb-react-eriks-cvetkovs/",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.6.9",
