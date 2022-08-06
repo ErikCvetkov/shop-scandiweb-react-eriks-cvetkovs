@@ -40,7 +40,7 @@ export class Form extends Component {
 
     componentDidMount() {
         let attributes = {}
-        this.state.item.attributes.forEach((attribute) => {
+        this.state.item.attributes.forEach((attribute)=>{
             attributes[attribute.name] = null
         })
         this.setState({
@@ -105,9 +105,9 @@ export class Form extends Component {
                             </div>
                         </div>
                         {
-                            item.attributes.map((attribute,index) => {
+                            item.attributes.map((attribute) => {
                                 return (
-                                    <div className='attribute' key={`${attribute.id} ${index}`}>
+                                    <div className='attribute' key={attribute.id}>
                                         <div className='attribute-name'>
                                             {attribute.name}
                                             {this.state.errorFields.includes(attribute.name) ? (
