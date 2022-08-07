@@ -31,7 +31,6 @@ export class Categories extends Component {
     }
 
     render() {
-        console.log(this.props.params)
         return (
             <Query query={POSTS_CATEGORIES}>
                 {({ loading, error, data }) => {

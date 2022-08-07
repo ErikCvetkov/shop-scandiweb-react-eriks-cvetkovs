@@ -37,7 +37,6 @@ export class Header extends Component {
 
 
     render() {
-        console.log(this)
         return (
             <header>
                 <div className='nav-box'>
