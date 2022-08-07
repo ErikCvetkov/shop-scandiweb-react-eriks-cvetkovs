@@ -1,22 +1,14 @@
 import React, { Component } from 'react'
-import { gql } from '@apollo/client';
 import { Query } from '@apollo/client/react/components';
 import withRouter from './withRouter';
 import { Link } from 'react-router-dom';
+import {POSTS_CATEGORIES} from '../queries/categories.js'
 
-const POSTS_CATEGORIES = gql`
-query categoties {
-    categories{
-			name
-    }
-}
-`;
 
 export class Categories extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            // activeTab: this.props.params.location.state.currentCategory
             activeTab: "all"
         }
     }
@@ -39,6 +31,7 @@ export class Categories extends Component {
     }
 
     render() {
+        console.log(this.props.params)
         return (
             <Query query={POSTS_CATEGORIES}>
                 {({ loading, error, data }) => {
